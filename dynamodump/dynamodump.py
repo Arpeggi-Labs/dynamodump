@@ -1122,9 +1122,6 @@ def main():
         "-r",
         "--region",
         help="AWS region to use, e.g. 'us-west-1'. "
-        "Can use AWS_DEFAULT_REGION for local testing.  Use '"
-        + LOCAL_REGION
-        + "' for local DynamoDB testing",
     )
     parser.add_argument(
         "--host", help="Host of local DynamoDB [required only for local]"
@@ -1251,7 +1248,7 @@ def main():
         sys.exit(1)
 
     # instantiate connection
-    if args.region == LOCAL_REGION:
+    if args.host != "":
         conn = _get_aws_client(
             service="dynamodb",
             access_key=args.accessKey,
