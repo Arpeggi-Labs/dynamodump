@@ -1124,7 +1124,7 @@ def main():
         help="AWS region to use, e.g. 'us-west-1'. "
     )
     parser.add_argument(
-        "--host", help="Host of local DynamoDB [required only for local]"
+        "--endpoint", help="Host of local DynamoDB [required only for local]"
     )
     parser.add_argument(
         "--port", help="Port of local DynamoDB [required only for local]"
@@ -1248,13 +1248,13 @@ def main():
         sys.exit(1)
 
     # instantiate connection
-    if args.host != "":
+    if args.endpoint != "":
         conn = _get_aws_client(
             service="dynamodb",
             access_key=args.accessKey,
             secret_key=args.secretKey,
             region=args.region,
-            endpoint_url="http://" + args.host + ":" + args.port,
+            endpoint_url=args.endpoint,
         )
         sleep_interval = LOCAL_SLEEP_INTERVAL
     else:
